@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="header">Sudoku</h2>
+    <hr>
+    <div class="gameBoard">
+        <div class="bl sq1 rw1 cl1"></div>    <div class="bl sq1 rw1 cl2"></div>    <div class="bl sq1 rw1 cl3"></div>    <div class="bl sq2 rw1 cl4"></div>    <div class="bl sq2 rw1 cl5"></div>    <div class="bl sq2 rw1 cl6"></div>    <div class="bl sq3 rw1 cl7"></div>    <div class="bl sq3 rw1 cl8"></div>    <div class="bl sq3 rw1 cl9"></div>
+        <div class="bl sq1 rw2 cl1"></div>    <div class="bl sq1 rw2 cl2"></div>    <div class="bl sq1 rw2 cl3"></div>    <div class="bl sq2 rw2 cl4"></div>    <div class="bl sq2 rw2 cl5"></div>    <div class="bl sq2 rw2 cl6"></div>    <div class="bl sq3 rw2 cl7"></div>    <div class="bl sq3 rw2 cl8"></div>    <div class="bl sq3 rw2 cl9"></div>
+        <div class="bl sq1 rw3 cl1"></div>    <div class="bl sq1 rw3 cl2"></div>    <div class="bl sq1 rw3 cl3"></div>    <div class="bl sq2 rw3 cl4"></div>    <div class="bl sq2 rw3 cl5"></div>    <div class="bl sq2 rw3 cl6"></div>    <div class="bl sq3 rw3 cl7"></div>    <div class="bl sq3 rw3 cl8"></div>    <div class="bl sq3 rw3 cl9"></div>
+        <div class="bl sq4 rw4 cl1"></div>    <div class="bl sq4 rw4 cl2"></div>    <div class="bl sq4 rw4 cl3"></div>    <div class="bl sq5 rw4 cl4"></div>    <div class="bl sq5 rw4 cl5"></div>    <div class="bl sq5 rw4 cl6"></div>    <div class="bl sq6 rw4 cl7"></div>    <div class="bl sq6 rw4 cl8"></div>    <div class="bl sq6 rw4 cl9"></div>
+        <div class="bl sq4 rw5 cl1"></div>    <div class="bl sq4 rw5 cl2"></div>    <div class="bl sq4 rw5 cl3"></div>    <div class="bl sq5 rw5 cl4"></div>    <div class="bl sq5 rw5 cl5"></div>    <div class="bl sq5 rw5 cl6"></div>    <div class="bl sq6 rw5 cl7"></div>    <div class="bl sq6 rw5 cl8"></div>    <div class="bl sq6 rw5 cl9"></div>
+        <div class="bl sq4 rw6 cl1"></div>    <div class="bl sq4 rw6 cl2"></div>    <div class="bl sq4 rw6 cl3"></div>    <div class="bl sq5 rw6 cl4"></div>    <div class="bl sq5 rw6 cl5"></div>    <div class="bl sq5 rw6 cl6"></div>    <div class="bl sq6 rw6 cl7"></div>    <div class="bl sq6 rw6 cl8"></div>    <div class="bl sq6 rw6 cl9"></div>
+        <div class="bl sq7 rw7 cl1"></div>    <div class="bl sq7 rw7 cl2"></div>    <div class="bl sq7 rw7 cl3"></div>    <div class="bl sq8 rw7 cl4"></div>    <div class="bl sq8 rw7 cl5"></div>    <div class="bl sq8 rw7 cl6"></div>    <div class="bl sq9 rw7 cl7"></div>    <div class="bl sq9 rw7 cl8"></div>    <div class="bl sq9 rw7 cl9"></div>
+        <div class="bl sq7 rw8 cl1"></div>    <div class="bl sq7 rw8 cl2"></div>    <div class="bl sq7 rw8 cl3"></div>    <div class="bl sq8 rw8 cl4"></div>    <div class="bl sq8 rw8 cl5"></div>    <div class="bl sq8 rw8 cl6"></div>    <div class="bl sq9 rw8 cl7"></div>    <div class="bl sq9 rw8 cl8"></div>    <div class="bl sq9 rw8 cl9"></div>
+        <div class="bl sq7 rw9 cl1"></div>    <div class="bl sq7 rw9 cl2"></div>    <div class="bl sq7 rw9 cl3"></div>    <div class="bl sq8 rw9 cl4"></div>    <div class="bl sq8 rw9 cl5"></div>    <div class="bl sq8 rw9 cl6"></div>    <div class="bl sq9 rw9 cl7"></div>    <div class="bl sq9 rw9 cl8"></div>    <div class="bl sq9 rw9 cl9"></div>
+    </div>
+<br>
+
+<hr>
+        <div class="holding" id="x"></div>
+    <div class="inputGrid">
+        <button class="input" id="1" value="1">1</button>
+        <button class="input" id="2" value="2">2</button>
+        <button class="input" id="3" value="3">3</button>
+        <button class="input" id="4" value="4">4</button>
+        <button class="input" id="5" value="5">5</button>
+        <button class="input" id="6" value="6">6</button>
+        <button class="input" id="7" value="7">7</button>
+        <button class="input" id="8" value="8">8</button>
+        <button class="input" id="9" value="9">9</button>
+        <button class="input" id="" value="">erase</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

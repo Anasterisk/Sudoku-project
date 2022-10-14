@@ -1,0 +1,67 @@
+body{
+    text-align: center;
+    background-color: brown;
+}
+#header{
+    text-shadow: 15px;
+    color: antiquewhite;
+}
+.gameBoard{
+    width: 540px;
+    height: 540px;
+    background-color: gray;
+    display: grid;
+    align-items: center;
+    margin: auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+}
+.bl{
+    display: grid;
+    background-color: white;
+    border-style: solid;
+    /* border-width: 1px; */
+    border-width: 1px;
+    width: 56px;
+    height:56px;
+    text-align: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.rw1{
+    border-top: 5px solid black;
+}
+.rw4{
+    border-top: 5px solid black;
+}
+.rw7{
+    border-top: 5px solid black;
+}
+.cl3{
+    border-right: 5px solid black;
+}
+.cl6{
+    border-right: 5px solid black;
+}
+.cl9{
+    border-right: 5px solid black;
+}
+.rw3{
+    border-bottom: 5px solid  black ;
+}
+.rw6{
+    border-bottom: 5px solid  black ;
+}
+.rw9{
+    border-bottom: 5px solid  black ;
+}
+.c1{
+    border-left: 5px solid  black ;
+}
+.c4{
+    border-left: 5px solid  black ;
+}
+.c7{
+    border-left: 5px solid  black ;
+}
