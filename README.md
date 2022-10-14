@@ -16,3 +16,6 @@ The first page should include the name of the game, instructions, and a couple o
 
 ### Game Page
 The following page should have the 9x9 game board, 11 input buttons, the timer displayed and the difficulty chosen
+
+# Wire frame
+https://wireframe.cc/XwSGkK
