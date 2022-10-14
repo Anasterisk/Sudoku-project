@@ -21,4 +21,4 @@ The following page should have the 9x9 game board, 11 input buttons, the timer d
 https://wireframe.cc/XwSGkK
 
 # trello board
-underworks
+https://trello.com/invite/b/lHpEeS7a/d428eec7cad30d57d8ed145b76613c0b/sudoku-project-board
