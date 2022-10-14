@@ -9,7 +9,7 @@ for (let i=0; i<input.length; i++){
        
        console.log("hello " + input[i].innerText)
         
-        holding.setAttribute('id', input[i].innerText) 
+        holding.setAttribute('id', input[i].value) 
         console.log(holding.id)
         return
     })
