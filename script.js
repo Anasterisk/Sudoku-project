@@ -15,25 +15,26 @@ for (let i=0; i<input.length; i++){
     })
     
 }
-
-for(let j = 0; j<boardSquare.length; j++){
+//the inhibitor is only checking the original
+for(let j = 0; j<boardSquare.length; j++){    
+    boardSquare[j].addEventListener('click',(e)=>{  
+for(let k=0; k<27;k++){
     for(let i = 1; i<4; i++){
-        //for(let k=0; k<9;k++){
-    boardSquare[j].addEventListener('click',(e)=>{
-        // if (e.target.classList[1].innerHTML === holding.id){
-        //     console.log(e.target)
-        //     return
-        // } else {
-       
-        boardSquare[j].innerHTML=holding.id
-        console.log(boardSquare[j].classList.contains(`${e.target.classList[1]}`))
-        console.log("hi")
-       
+     if (   document.querySelectorAll(`.${e.target.classList[1]}`)[k].innerHTML === holding.id ||
+            document.querySelectorAll(`.${e.target.classList[2]}`)[k].innerHTML === holding.id ||
+            document.querySelectorAll(`.${e.target.classList[3]}`)[k].innerHTML === holding.id ){
+             console.log("denied")
+             return
+    }else {
         
+        boardSquare[j].innerHTML=holding.id
+        console.log("hi")
         return
+         }
+        }
     }
-    )
-}}
+    })
+}
 //save for later reference
 // identifying the class list
 //boardSquare[j].classList[1]+ boardSquare[j].classList[2]+ boardSquare[j].classList[3]
@@ -42,3 +43,10 @@ for(let j = 0; j<boardSquare.length; j++){
 //e.target.classList[i] 
 
 //e.target.innerHTML
+
+//VV how to compare classList 
+//
+//boardSquare[j].classList.contains(`${e.target.classList[1]}`)
+//
+//document.querySelectorAll(`.${e.target.classList[i]}`)[k].innerHTML
+//^^ this code checks for all 27 spaces (region, row, and column) for it's innerHTML.
