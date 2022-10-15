@@ -15,24 +15,26 @@ for (let i=0; i<input.length; i++){
     })
     
 }
-//the inhibitor is only checking the original
-for(let j = 0; j<boardSquare.length; j++){    
-    boardSquare[j].addEventListener('click',(e)=>{  
-for(let k=0; k<27;k++){
-    for(let i = 1; i<4; i++){
+//the inhibitor is only checking the original input before just bypassing the check
+for(let i = 0; i<boardSquare.length; i++){    
+        boardSquare[i].addEventListener('click',function(e){  
+    for(let j = 1; j<4; j++){    
+        for(let k=0; k<9;k++){    //this doesn't need to be repeated three times but because it won't loop it's just here
      if (   document.querySelectorAll(`.${e.target.classList[1]}`)[k].innerHTML === holding.id ||
             document.querySelectorAll(`.${e.target.classList[2]}`)[k].innerHTML === holding.id ||
             document.querySelectorAll(`.${e.target.classList[3]}`)[k].innerHTML === holding.id ){
-             console.log("denied")
-             return
-    }else {
+            console.log(e.target.classList)
+            return
+            // pretty sure the check isn't being reinitialized everytime
+    }else if(document.querySelectorAll(`.${e.target.classList[j]}`)[k].innerHTML !== holding.id ) 
+    {
         
-        boardSquare[j].innerHTML=holding.id
+        boardSquare[i].innerHTML=holding.id
         console.log("hi")
         return
          }
         }
-    }
+     }
     })
 }
 //save for later reference
