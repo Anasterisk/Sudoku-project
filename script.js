@@ -9,7 +9,11 @@ let int =null
 let input= document.querySelectorAll(".input")
 let holding = document.querySelector(".holding")
 let boardSquare = document.querySelectorAll('.bl')
-let completed = false
+let completed   = false
+let legalMove   = false
+let checkSq     = null
+let checkRow    = null
+let checkCol    = null
 
 // game timer// 
 //https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html used it a reference still not working though
@@ -46,10 +50,10 @@ const clocking=()=>{
 for (let i=0; i<input.length; i++){
     input[i].addEventListener('click',()=>{
        
-       console.log("hello " + input[i].innerText)
+       console.log(`checking input button ${input[i].innerText}`)
         playingValue = input[i].innerText
         holding.setAttribute('id', input[i].value) 
-        console.log(holding.id)
+        console.log(`holding.id value check ${holding.id}`)
         startTimer
         return
     })
@@ -67,40 +71,71 @@ const completionCheck =()=>{
     }
 }
 }
-        //
-// const inhibitorCheck=()=>{
-//     for(let j = 1; j<4; j++){ 
-//         for(let k=0; k<9;k++){ 
-//             document.querySelectorAll(`.${e.target.classList[j]}`)[k].innerHTML
-//             return
-// }}}
+  // testing function calls//
+const testFunct=()=>{
+    console.log("test function is running")
+    return
+}
+
+// inhibitor check functioning//
+const inhibitorCheck=()=>{
+    console.log("inhibitor check")
+    //for(let i = 0; i<boardSquare.length; i++){    
+        //boardSquare[i].addEventListener('click',function(e){    
+        console.log("inhibitor check 2")
+    //for(let j = 1; j<4; j++){ 
+        for(let k=0; k<9;k++){
+           console.log("inhibitor check 3 attempt")
+    if( checkSq[k].innerHTML === holding.id ||
+        checkRow[k].innerHTML === holding.id||     
+        checkCol[k].innerHTML === holding.id){
+        
+        
+        
+        console.log("inhibitor check 3 blocked")
+        legalMove = false 
+        return     
+        }else{
+        
+        console.log("inhibitor check 3 passed")
+        legalMove = true
+        }
+    }}
+
 
 
 //Game logic//
-                //the inhibitor is only checking the original input before just bypassing the check
+                //the functions aren't being called
 for(let i = 0; i<boardSquare.length; i++){    
-    boardSquare[i].addEventListener('click',function(e){  
-for(let j = 1; j<4; j++){ 
-   for(let k=0; k<9;k++){   
-if (                    // current input inhibitor in the works //
-        document.querySelectorAll(`.${e.target.classList[1]}`)[k].innerHTML === holding.id||
-        document.querySelectorAll(`.${e.target.classList[2]}`)[k].innerHTML === holding.id||     
-        document.querySelectorAll(`.${e.target.classList[3]}`)[k].innerHTML === holding.id
-    ){
-    console.log()
-    return
-}else {
-    
-    boardSquare[i].innerHTML=holding.id
-    console.log("bypassed")
-    return
-     }
+    boardSquare[i].addEventListener('click',function(e){       
+    if ( legalMove === false){
+                    console.log(`logic check 1, legalMove: ${legalMove}`)
+                    checkSq = document.querySelectorAll(`.${e.target.classList[1]}`)
+                    checkRow= document.querySelectorAll(`.${e.target.classList[2]}`)
+                    checkCol= document.querySelectorAll(`.${e.target.classList[3]}`)
+        inhibitorCheck();
+                    console.log(`logic check 2, "legalMove: ${legalMove}"`)
+        if (legalMove === true){       
+        boardSquare[i].innerHTML=holding.id
+                    console.log(`logic check 3 "bypassed", legalMove: ${legalMove}`)
+        legalMove   = false
+        checkSq     = null
+        checkRow    = null
+        checkCol    = null
+                    console.log(legalMove)
+        return
+        }else if(legalMove === false) {
+                    console.log (`logic check 3 "invalid move"`)
+                    console.log(legalMove)
+        checkSq     = null
+        checkRow    = null
+        checkCol    = null
+        return
     }
- }
-})
-}
+    }
+})}
 
-
+console.log(document.querySelectorAll(`.${e.target.classList[1]}`)[k].innerHTML);
 //save for later reference
 // identifying the class list
 //boardSquare[j].classList[1]+ boardSquare[j].classList[2]+ boardSquare[j].classList[3]
@@ -117,3 +152,14 @@ if (                    // current input inhibitor in the works //
 //document.querySelectorAll(`.${e.target.classList[i]}`)[k].innerHTML
 //^^ this code checks for all 27 spaces (region, row, and column) for it's innerHTML.
 
+//winning board {
+// 123978564,
+// 456312897,
+// 789645231,
+// 312897456,
+// 645231789,
+// 978564123,
+// 231789645,
+// 564123978,
+// 897456312,
+// }
