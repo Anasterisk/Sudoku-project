@@ -70,7 +70,7 @@ const clocking=()=>{
         }
     }
     let h = hours <10   ?"0"+hours: hours
-    let m = minutes <10  ?"0"+minutes: minutes
+    let m = minutes <10 ?"0"+minutes: minutes
     let s = seconds <10 ?"0"+seconds: seconds
     return timer.innerHTML=`${h}:${m}:${s}`
 }
@@ -80,12 +80,11 @@ for (let i=0; i<input.length; i++){
     input[i].addEventListener('click',()=>{
         playingValue = input[i].innerText
         holding.setAttribute('id', input[i].value) 
-        //return
     })
     
 }
 
-// game stopping functions // 
+//// game halting functions //// 
 const boardCal = (x)=>{
     y = parseInt(identifier) || 0
     console.log(y)
@@ -101,13 +100,7 @@ const completionCheck =()=>{
     }
 }
 
-  // testing function calls//
-const testFunct=()=>{
-    console.log("test function is running")
-    return
-}
-
-// inhibitor check functioning//
+//// inhibitor check functioning////
 const inhibitorCheck=()=>{
         for(let k=0; k<9;k++){
     if( checkSq[k].innerHTML === holding.id ||
@@ -121,7 +114,7 @@ const inhibitorCheck=()=>{
     }
 }
 
-//Game logic//
+////Game logic////
 
 for(let i = 0; i<boardSquare.length; i++){ 
     boardSquare[i].addEventListener('click',function(e){
@@ -155,10 +148,10 @@ for(let i = 0; i<boardSquare.length; i++){
                     checkCol    = null
                     identifier  = null
                 return
+            }
+        }
     }
-    }
-    
-})}
+)}
 timer.addEventListener("click",()=>{
     stopTimer()
 })
@@ -167,8 +160,7 @@ skip.addEventListener("click",()=> {
     boardSquare[i].innerHTML=quickFill[i]
     boardBalance = 1215
     completionCheck()
-}
-)
+})
 
 //save for later reference
 // identifying the class list
