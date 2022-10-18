@@ -1,9 +1,6 @@
 
-//let playingValue = ''
+
 //timer variables
-// let seconds = 0
-// let minutes = 0
-// let hours   =0
 let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
 let timer = document.querySelector('.timer')
 let int =null
@@ -36,17 +33,20 @@ let checkRow    = null
 let checkCol    = null
 
 // game timer// 
-//https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html used it a reference still not working though
+//https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html 
     // starting function//
  const startTimer=()=> {
-    console.log("timer Starts")
+    console.log("timer checks")
     if (completed===true){
+        console.log("halted")
         return
     }
     else if (int!== null){
         clearInterval(int)
+        console.log("clear interval")
     }
-    int = setInterval(timer,1000)
+    int = setInterval(clocking,1000)
+    console.log("time running")
  }
     // stoping function//
 const stopTimer =()=>{
@@ -60,19 +60,15 @@ const resetTimer=()=>{
 }
     // timer innards//
 const clocking=()=>{
-    milliseconds+=10;
-    if(milliseconds===1000){
-        milliseconds = 0;
         seconds ++
-        if( seconds === 60){
+        if( seconds == 60){
             seconds = 0
             minutes++
-            if(minutes === 60){
+            if(minutes == 60){
                 minutes = 0
                 hours ++
         }
     }
-}
     let h = hours <10   ?"0"+hours: hours
     let m = minutes <10  ?"0"+minutes: minutes
     let s = seconds <10 ?"0"+seconds: seconds
@@ -84,23 +80,10 @@ for (let i=0; i<input.length; i++){
     input[i].addEventListener('click',()=>{
         playingValue = input[i].innerText
         holding.setAttribute('id', input[i].value) 
-        startTimer()
-        return
+        //return
     })
     
 }
-// const matrixCal=(mockBoard,x)=>{
-//     let matrix =[],i,k;
-//      x=9
-//     for(i = 0, k=-1;i<mockBoard.length;i++){
-//         if(i%x ===0){
-//             k++;
-//             matrix[k]=[];
-//         }
-//         matrix[k].push(list[i]);
-//     }
-//     return matrix
-// }
 
 // game stopping functions // 
 const boardCal = (x)=>{
@@ -115,7 +98,6 @@ const completionCheck =()=>{
     if(boardBalance===1215){
         completed = true
         stopTimer()
-        console.log(`${boardBalance} and ${completed}`)
     }
 }
 
@@ -127,20 +109,17 @@ const testFunct=()=>{
 
 // inhibitor check functioning//
 const inhibitorCheck=()=>{
-    console.log("inhibitor check")
         for(let k=0; k<9;k++){
     if( checkSq[k].innerHTML === holding.id ||
         checkRow[k].innerHTML === holding.id||     
         checkCol[k].innerHTML === holding.id){
         legalMove = false 
         return     
-        }else{
+    }else{
         legalMove = true
         }
     }
 }
-
-
 
 //Game logic//
 
@@ -152,39 +131,37 @@ for(let i = 0; i<boardSquare.length; i++){
         return
     }
     else if ( legalMove === false){
-                    console.log(`logic check 1, legalMove: ${legalMove}`)
+            //establishing board check variables//
         checkSq = document.querySelectorAll(`.${e.target.classList[1]}`)
         checkRow= document.querySelectorAll(`.${e.target.classList[2]}`)
         checkCol= document.querySelectorAll(`.${e.target.classList[3]}`)
         inhibitorCheck();
-                    console.log(`logic check 2, "legalMove: ${legalMove}"`)
             if (legalMove === true){ 
                 boardCal();
-                    console.log(`square value before edit: ${boardSquare[i].innerHTML}`)      
                 boardSquare[i].innerHTML=holding.id
-                    console.log(`logic check 3 "bypassed", legalMove: ${legalMove}`)
-                legalMove   = false
-                checkSq     = null
-                checkRow    = null
-                checkCol    = null
-                identifier  = null
-                    console.log(legalMove)
-                    console.log(`total ${boardBalance}`)
+                startTimer()
+                    //resetting game to neutral//
+                    legalMove   = false
+                    checkSq     = null
+                    checkRow    = null
+                    checkCol    = null
+                    identifier  = null
                 completionCheck()
                 return
             }else if(legalMove === false) {
-                    console.log (`logic check 3 "invalid move"`)
-                    console.log(legalMove)
-                checkSq     = null
-                checkRow    = null
-                checkCol    = null
-                identifier  = null
+                    //resetting game to neutral//
+                    checkSq     = null
+                    checkRow    = null
+                    checkCol    = null
+                    identifier  = null
                 return
     }
     }
     
 })}
-
+timer.addEventListener("click",()=>{
+    stopTimer()
+})
 skip.addEventListener("click",()=> {
     for(let i=0; i<boardSquare.length; i++)
     boardSquare[i].innerHTML=quickFill[i]
