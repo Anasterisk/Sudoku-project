@@ -112,6 +112,13 @@ for (let i=0; i<input.length; i++){
     }})
     }
 
+const resetStates =()=>{
+    legalMove   = false
+    checkSq     = null
+    checkRow    = null
+    checkCol    = null
+    identifier  = null
+}
 
 //// game halting functions //// 
 const boardCal = (x)=>{
@@ -156,8 +163,9 @@ for(let i = 0; i<boardSquare.length; i++){
         completionCheck()
     if (completed=== true){
         return
-    }
-    else if ( legalMove === false){
+    } else if (holding.id === ""){
+        boardSquare[i].innerHTML = holding.id
+    }else if ( legalMove === false){
             //establishing board check variables//
         checkSq = document.querySelectorAll(`.${e.target.classList[1]}`)
         checkRow= document.querySelectorAll(`.${e.target.classList[2]}`)
@@ -167,20 +175,11 @@ for(let i = 0; i<boardSquare.length; i++){
                 boardCal();
                 boardSquare[i].innerHTML=holding.id
                 startTimer()
-                    //resetting game to neutral//
-                    legalMove   = false
-                    checkSq     = null
-                    checkRow    = null
-                    checkCol    = null
-                    identifier  = null
+                resetStates()
                 completionCheck()
                 return
             }else if(legalMove === false) {
-                    //resetting game to neutral//
-                    checkSq     = null
-                    checkRow    = null
-                    checkCol    = null
-                    identifier  = null
+                resetStates()
                 return
             }
         }
@@ -198,13 +197,18 @@ skip.addEventListener("click",()=> {
 })
 
 //randomizer in-theworks//
-const randomInput=()=>{
+const randomInput=(min,max)=>{
     min = Math.ceil(1)
     max = Math.floor(9)
-    return Math.floor(Math.random()*(max-min)+min)
+    return Math.floor(Math.random()*(max-min+1)+min)
+} 
+const randomizerValues =()=>{
+    
 }
 
+console.log(document.querySelectorAll(`.rw${randomInput()}`)[randomInput()].classList)
 const autoPopulate =()=>{
+    //do{ 
 }
 
 //save for later reference
