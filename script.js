@@ -1,5 +1,9 @@
-
-
+//menu buttons
+let timeToggle = document.querySelector('#timeToggle')
+let startbutton = document.querySelector('#start')
+let toggle = document.querySelector('.toggle')
+let time = false
+let start = false
 //timer variables
 let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
 let timer = document.querySelector('.timer')
@@ -32,16 +36,36 @@ let checkSq     = null
 let checkRow    = null
 let checkCol    = null
 
+
+    // settings//
+const settingTimer =()=>{
+    console.log("checking")
+    if( timeToggle.checked === false){
+        toggle.style.display ="none"
+        console.log("unchecked")
+        time = false
+        timer.style.display="inline-flex"
+        timer.style.color  ="gray" 
+    }else{
+        toggle.style.display ="none"
+        timer.style.display ="inline-flex"
+        time = true
+        console.log("click")
+        console.log(timeToggle.checked=true)
+    }
+}
+
 // game timer// 
 //https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html 
     // starting function//
  const startTimer=()=> {
     console.log("timer checks")
-    if (completed===true){
+    if(time === false){
+        return
+    }else if (completed===true){
         console.log("halted")
         return
-    }
-    else if (int!== null){
+    }else if (int!== null){
         clearInterval(int)
         console.log("clear interval")
     }
@@ -78,11 +102,16 @@ const clocking=()=>{
 // selecting input value//
 for (let i=0; i<input.length; i++){
     input[i].addEventListener('click',()=>{
+        if(start === false){
+            console.log(`start check ${start}`)
+            return
+        }else{
         playingValue = input[i].innerText
         holding.setAttribute('id', input[i].value) 
-    })
-    
-}
+        console.log("inputfunct running")
+    }})
+    }
+
 
 //// game halting functions //// 
 const boardCal = (x)=>{
@@ -94,7 +123,7 @@ const boardCal = (x)=>{
 }
 
 const completionCheck =()=>{ 
-    if(boardBalance===1215){
+    if(boardBalance===405){
         completed = true
         stopTimer()
     }
@@ -113,9 +142,14 @@ const inhibitorCheck=()=>{
         }
     }
 }
+///Game Settings///
+startbutton.addEventListener('click', ()=>{
+    settingTimer()
+    start = true
+    console.log(start)
+})
 
 ////Game logic////
-
 for(let i = 0; i<boardSquare.length; i++){ 
     boardSquare[i].addEventListener('click',function(e){
         identifier = boardSquare[i].innerHTML
@@ -152,15 +186,26 @@ for(let i = 0; i<boardSquare.length; i++){
         }
     }
 )}
+
 timer.addEventListener("click",()=>{
     stopTimer()
 })
 skip.addEventListener("click",()=> {
     for(let i=0; i<boardSquare.length; i++)
     boardSquare[i].innerHTML=quickFill[i]
-    boardBalance = 1215
+    boardBalance = 405
     completionCheck()
 })
+
+//randomizer in-theworks//
+const randomInput=()=>{
+    min = Math.ceil(1)
+    max = Math.floor(9)
+    return Math.floor(Math.random()*(max-min)+min)
+}
+
+const autoPopulate =()=>{
+}
 
 //save for later reference
 // identifying the class list

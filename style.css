@@ -72,11 +72,24 @@ body{
     border-left: 5px solid  black ;
 }
 
-.timer{ 
+.clock{ 
+    display: inline-flex;
+    flex-direction: row;
     position: relative;
     text-align: right;
-    padding-right: 17%;
+    padding:0 17% 0 15%;
     color: bisque;
     font-size: 40px;
 }
-
+.setting{
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    text-align: right;
+    padding:0 15% 0 17%;
+    color: bisque;
+    font-size: 25px;
+}
+.timer{
+    display:none
+}
