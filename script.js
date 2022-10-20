@@ -1,4 +1,5 @@
 //menu buttons
+let difficulty = document.querySelectorAll('input[name="difficulty"]')
 let timeToggle = document.querySelector('#timeToggle')
 let startbutton = document.querySelector('#start')
 let toggle = document.querySelector('.toggle')
@@ -36,7 +37,37 @@ let checkSq     = null
 let checkRow    = null
 let checkCol    = null
 
-
+//cpu variables//
+const resetBoard =[
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9]
+]
+let cpuBoard= [
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9],
+    [1,2,3,4,5,6,7,8,9]
+]
+let cpuInput = NaN
+let cpuRw= NaN
+let cpuRwI = NaN
+let cpuAttempt = NaN
+let cpuInputPool = [1,2,3,4,5,6,7,8,9]
+let cpuBoardRange = null
+let cpuMinsq    = null
+let setDifficulty = null
     // settings//
 const settingTimer =()=>{
     console.log("checking")
@@ -197,20 +228,72 @@ skip.addEventListener("click",()=> {
 })
 
 //randomizer in-theworks//
+
 const randomInput=(min,max)=>{
     min = Math.ceil(1)
     max = Math.floor(9)
     return Math.floor(Math.random()*(max-min+1)+min)
 } 
-const randomizerValues =()=>{
-    
+
+const cpuPickRw =(min,max)=>{
+    min = Math.ceil(1)
+    max = Math.floor(cpuBoard[randomInput()-1].length)
+    cpuRw = Math.floor(Math.random()*(max-min+1)+min) 
+}
+cpuPickRw()
+const cpuPickRwI =(min,max)=>{
+    min = Math.ceil(1)
+    max = Math.floor(cpuBoard[cpuRw-1].length)
+    cpuRwI = Math.floor(Math.random()*(max-min+1)+min) 
+}
+const cpuPlayInput =()=>{
+    min=Math.ceil(1)
+    max=Math.floor(cpuInputPool.length)
+    cpuInput = Math.floor(Math.random()*(max-min+1)+min)
 }
 
-console.log(document.querySelectorAll(`.rw${randomInput()}`)[randomInput()].classList)
+console.log(cpuRw)
+cpuPickRwI()
+console.log(cpuRwI)
 const autoPopulate =()=>{
-    //do{ 
+    let balance = 0
+    let run     = 0
+    while(balance < cpuBoardRange && run < cpuMinsq){
+        cpuAttempt = randomInput()
+        for(let i =0; i< cpuAttempt;){
+            cpuPlayInput()
+            cpuPickRw()
+            cpuPickRwI()
+        }
+
+    }
+
 }
 
+const cpuParameter=()=>{
+    if (setDifficulty === "easy"){
+        cpuBoardRange   = 135
+        cpuMinsq        = 40
+}else if (setDifficulty === "medium"){
+        cpuBoardRange   = 108
+        cpuMinsq        = 30
+}else if (setDifficulty === `hard`){
+        cpuBoardRange   = 87
+        cpuMinsq        = 25
+    }
+}
+
+const changingDiff=()=>{
+    for(let set of difficulty){
+        if (set.checked){
+         setDifficulty = set.id
+    }}
+    cpuParameter()
+
+}
+const test=()=>{
+    console.log(setDifficulty)
+}
 //save for later reference
 // identifying the class list
 //boardSquare[j].classList[1]+ boardSquare[j].classList[2]+ boardSquare[j].classList[3]
