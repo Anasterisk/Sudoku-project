@@ -60,14 +60,39 @@ let cpuBoard= [
     [1,2,3,4,5,6,7,8,9],
     [1,2,3,4,5,6,7,8,9]
 ]
+let cpuSoftBoard= []
+let cpuNonant=[
+    ["a","a","a","b","b","b","c","c","c"],
+    ["a","a","a","b","b","b","c","c","c"],
+    ["a","a","a","b","b","b","c","c","c"],
+    ["d","d","d","e","e","e","f","f","f"],
+    ["d","d","d","e","e","e","f","f","f"],
+    ["d","d","d","e","e","e","f","f","f"],
+    ["g","g","g","h","h","h","i","i","i"],
+    ["g","g","g","h","h","h","i","i","i"],
+    ["g","g","g","h","h","h","i","i","i"]
+]
 let cpuInput = NaN
 let cpuRw= NaN
 let cpuRwI = NaN
 let cpuAttempt = NaN
 let cpuInputPool = [1,2,3,4,5,6,7,8,9]
+let cpuRwPool = [1,2,3,4,5,6,7,8,9]
 let cpuBoardRange = null
 let cpuMinsq    = null
 let setDifficulty = null
+let softArray = NaN
+let softArrayR = NaN
+let softArrI= NaN
+let softArrIR=NaN
+const cpuFullReset=()=>{
+    cpuBoard=resetBoard
+    cpuInputPool = [1,2,3,4,5,6,7,8,9]
+    
+}
+const cpuRwReset=()=>{ 
+    cpuRwPool = [1,2,3,4,5,6,7,8,9]
+}
     // settings//
 const settingTimer =()=>{
     console.log("checking")
@@ -237,37 +262,104 @@ const randomInput=(min,max)=>{
 
 const cpuPickRw =(min,max)=>{
     min = Math.ceil(1)
-    max = Math.floor(cpuBoard[randomInput()-1].length)
-    cpuRw = Math.floor(Math.random()*(max-min+1)+min) 
+    max = Math.floor(cpuSoftBoard[cpuRwPool.length-1].length)
+    return cpuRw = Math.floor(Math.random()*(max-min+1)+min) 
 }
-cpuPickRw()
+
 const cpuPickRwI =(min,max)=>{
     min = Math.ceil(1)
-    max = Math.floor(cpuBoard[cpuRw-1].length)
+    max = Math.floor(cpuSoftBoard[cpuRw-1].length)
     cpuRwI = Math.floor(Math.random()*(max-min+1)+min) 
 }
-const cpuPlayInput =()=>{
+
+const cpuPlayInput =(min,max)=>{
     min=Math.ceil(1)
     max=Math.floor(cpuInputPool.length)
     cpuInput = Math.floor(Math.random()*(max-min+1)+min)
 }
 
-console.log(cpuRw)
-cpuPickRwI()
-console.log(cpuRwI)
-const autoPopulate =()=>{
-    let balance = 0
-    let run     = 0
-    while(balance < cpuBoardRange && run < cpuMinsq){
-        cpuAttempt = randomInput()
-        for(let i =0; i< cpuAttempt;){
-            cpuPlayInput()
-            cpuPickRw()
-            cpuPickRwI()
-        }
-
+const nonantCheck=()=>{
+    if(cpuNonant[cpuRw-1][cpuRwI-1]==="a"){
+    softArray=0
+    softArrI=1
+    }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="b"){
+        softArray=0
+        softArrI=4
+        }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="c"){
+            softArray=0
+            softArrI=7
+            }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="d"){
+                softArray=3
+                softArrI=1
+                }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="e"){
+                    softArray=3
+                    softArrI=4
+                    }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="f"){
+                        softArray=3
+                        softArrI=7
+                        }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="g"){
+                            softArray=6
+                            softArrI=1
+                            }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="h"){
+                                softArray=6
+                                softArrI=4
+                                }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="i"){
+                                    softArray=6
+                                    softArrI=7
+                                    }
+}
+const nonantFilter=()=>{
+for(let i= softArray; i<=softArray+2; i++){
+    for(let j =softArrI; j<=softArrI+2; j++)
+return cpuSoftBoard[i] =cpuSoftBoard[i].filter((x)=>x!==j)
+}}
+const cpuElementFilter=()=>{
+ for(let i=0; i<9;i++){
+    return cpuSoftBoard[i]=cpuSoftBoard[i].filter((x)=>x!==cpuRwI)
     }
-
+}
+const cpuBoardFilter=()=>{
+cpuBoard[cpuRw-1]= cpuBoard[cpuRw-1].filter((x)=>x!==cpuRwI)
+}
+const cpuRwPoolFilter=()=>{
+    cpuRwPool=cpuRwPool.filter((x)=>x!==cpuRw)
+    console.log(cpuRwPool)
+}
+const autoPopulate =()=>{
+    balance= 0
+    run = 0
+    //while( balance<= cpuBoardRange&& run<= cpuMinsq){
+        
+        cpuAttempt=randomInput()
+        cpuPlayInput()
+        console.log(cpuAttempt)
+        for(let i=0; i<= cpuAttempt;){
+            cpuSoftBoard=cpuBoard
+            cpuPickRw()
+            console.log(cpuRw)
+            cpuPickRwI()
+            console.log(cpuRwI-1)
+            if (document.querySelectorAll(`.rw${cpuRw}`)[cpuRwI-1].innerHTML!==""){
+                cpuBoardFilter()
+                cpuRwPoolFilter()
+                cpuElementFilter()
+                nonantCheck()
+                nonantFilter() 
+            } else{
+            cpuBoardFilter()
+            cpuRwPoolFilter()
+            cpuElementFilter()
+            nonantCheck()
+            nonantFilter() 
+            document.querySelectorAll(`.rw${cpuRw}`)[cpuRwI-1].innerHTML="x"
+            console.log(`rw${cpuRw}`)
+            console.log(cpuRwI-1)
+            console.log(`attempt${i}`)
+            console.log(`${cpuSoftBoard}  ${i}`)
+            console.log(`${cpuRwPool} ${i}`)
+            i++
+        } console.log(cpuSoftBoard)
+    }
 }
 
 const cpuParameter=()=>{
@@ -293,22 +385,8 @@ const changingDiff=()=>{
 }
 const test=()=>{
     console.log(setDifficulty)
-}
-//save for later reference
-// identifying the class list
-//boardSquare[j].classList[1]+ boardSquare[j].classList[2]+ boardSquare[j].classList[3]
-// boardSquare[j].classList[i] && boardSquare[j].innerText
-        //checking the clicked square's stats
-//e.target.classList[i] 
-
-//e.target.innerHTML
-
-//VV how to compare classList 
-//
-//boardSquare[j].classList.contains(`${e.target.classList[1]}`)
-//
-//document.querySelectorAll(`.${e.target.classList[i]}`)[k].innerHTML
-//^^ this code checks for all 27 spaces (region, row, and column) for it's innerHTML.
+}// 
+autoPopulate()
 
 //winning board {
 // 123978564,
