@@ -20,6 +20,19 @@ let completed   = false
 let boardBalance   = 0
 
 //shortcut fill//
+let ePreMade1= [
+    3,'','',6,1,'','','',8,'','',2,'',3,'',7,6,'','','','',7,5,'',2,9,'','',9,'',8,'','','',1,'','',4,'',1,7,3,'',5,'','',5,'','','',9,'',2,'','',3,7,'',4,1,'','','','',2,5,'',8,'',9,'','',4,'','','',9,7,'','',2]
+let    ePremade2=
+    ['','','',1,8,'','','',7,'',3,'',2,'','',6,5,'',1,'',9,'','',5,4,'',8,4,'','',7,6,'',8,'',5,'',7,'','','','','',4,'',2,'',5,'',9,8,'','',6,3,'',1,6,'','',9,'',2,'',5,7,'','',4,'',6,'',6,'','','',3,1,'','','',]
+let mPreMade1 =[
+    '','',6,'','','','','','','','','','',2,'',8,'',6,3,1,'','',8,3,6,7,'',1,'','','',9,7,8,'','','','','',5,'',8,'','','','','',7,1,6,'','','',9,'',4,'',6,'',5,3,'','',7,5,1,'',3,'',4,'','','','','','','','',7,'','',]
+let mPreMade2  = [
+    1,4,'',5,'',6,3,'','',3,'','','','','','',8,'',9,8,2,4,1,3,'','','','','','',8,'','','','',9,'',7,6,3,'','',1,2,'',8,'','','','',1,'','','','','','',2,3,7,4,8,1,5,'',5,'','','','','',6,'','',8,9,'',5,'',3,4]
+let hPreMade1=[
+    '','',6,3,'',7,'','','','','',4,'','','','','',5,1,'','','','',6,'',8,2,2,'',5,'',3,'',1,'',6,'','','',2,'','',3,'','',9,'','','',7,'','','',4,'',5,'','','','','','','','',1,'','','','','','','','','',8,1,'',9,'',4,'',]
+let hPreMade2=    [
+    '','',1,8,'','',5,3,'','','','','',6,3,'','','',8,'','',1,'','','','',4,'',4,'',7,'','','',8,'','','',7,'',5,'',6,'','',9,'',6,'','',2,7,'','','','',8,3,'','','','','','',9,'','',8,'',4,'',1,7,'','','','','','',2,'',]
+
 let skip = document.querySelector(".skip")
 let quickFill =[
     1,2,3,9,7,8,5,6,4,
@@ -37,62 +50,7 @@ let checkSq     = null
 let checkRow    = null
 let checkCol    = null
 
-//cpu variables//
-const resetBoard =[
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9]
-]
-let cpuBoard= [
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9]
-]
-let cpuSoftBoard= []
-let cpuNonant=[
-    ["a","a","a","b","b","b","c","c","c"],
-    ["a","a","a","b","b","b","c","c","c"],
-    ["a","a","a","b","b","b","c","c","c"],
-    ["d","d","d","e","e","e","f","f","f"],
-    ["d","d","d","e","e","e","f","f","f"],
-    ["d","d","d","e","e","e","f","f","f"],
-    ["g","g","g","h","h","h","i","i","i"],
-    ["g","g","g","h","h","h","i","i","i"],
-    ["g","g","g","h","h","h","i","i","i"]
-]
-let cpuInput = NaN
-let cpuRw= NaN
-let cpuRwI = NaN
-let cpuAttempt = NaN
-let cpuInputPool = [1,2,3,4,5,6,7,8,9]
-let cpuRwPool = [1,2,3,4,5,6,7,8,9]
-let cpuBoardRange = null
-let cpuMinsq    = null
-let setDifficulty = null
-let softArray = NaN
-let softArrayR = NaN
-let softArrI= NaN
-let softArrIR=NaN
-const cpuFullReset=()=>{
-    cpuBoard=resetBoard
-    cpuInputPool = [1,2,3,4,5,6,7,8,9]
-    
-}
-const cpuRwReset=()=>{ 
-    cpuRwPool = [1,2,3,4,5,6,7,8,9]
-}
+
     // settings//
 const settingTimer =()=>{
     console.log("checking")
@@ -111,22 +69,55 @@ const settingTimer =()=>{
     }
 }
 
+const randomPick =(min,max)=>{
+    min = Math.ceil(1)
+    max = Math.floor(2)
+    return Math.floor(Math.random()*(max-min+1)+min)
+}
+const cpuParameter=()=>{
+    if (setDifficulty === "easy"){
+        for(let i=0; i<boardSquare.length; i++)
+        boardSquare[i].innerHTML=ePreMade1[i]
+
+         boardBalance = 192
+ 
+         
+}else if (setDifficulty === "medium"){
+    for(let i=0; i<boardSquare.length; i++)
+    boardSquare[i].innerHTML=mPreMade1[i]
+            boardBalance = 132
+
+        
+}else if (setDifficulty === `hard`){
+    for(let i=0; i<boardSquare.length; i++)
+    boardSquare[i].innerHTML= hPreMade1[i]
+
+            boardBalance=111
+
+        }
+    }  
+
+const changingDiff=()=>{
+    for(let set of difficulty){
+        if (set.checked){
+         setDifficulty = set.id
+    }}
+    cpuParameter()
+
+}
+
 // game timer// 
 //https://www.foolishdeveloper.com/2021/10/simple-stopwatch-using-javascript.html 
     // starting function//
  const startTimer=()=> {
-    console.log("timer checks")
     if(time === false){
         return
     }else if (completed===true){
-        console.log("halted")
         return
     }else if (int!== null){
         clearInterval(int)
-        console.log("clear interval")
     }
     int = setInterval(clocking,1000)
-    console.log("time running")
  }
     // stoping function//
 const stopTimer =()=>{
@@ -209,7 +200,9 @@ const inhibitorCheck=()=>{
 startbutton.addEventListener('click', ()=>{
     settingTimer()
     start = true
-    console.log(start)
+    document.querySelector(".setting").style.display="none"
+    startbutton.style.display="none"
+
 })
 
 ////Game logic////
@@ -252,150 +245,3 @@ skip.addEventListener("click",()=> {
     completionCheck()
 })
 
-//randomizer in-theworks//
-
-const randomInput=(min,max)=>{
-    min = Math.ceil(1)
-    max = Math.floor(9)
-    return Math.floor(Math.random()*(max-min+1)+min)
-} 
-
-const cpuPickRw =(min,max)=>{
-    min = Math.ceil(1)
-    max = Math.floor(cpuSoftBoard[cpuRwPool.length-1].length)
-    return cpuRw = Math.floor(Math.random()*(max-min+1)+min) 
-}
-
-const cpuPickRwI =(min,max)=>{
-    min = Math.ceil(1)
-    max = Math.floor(cpuSoftBoard[cpuRw-1].length)
-    cpuRwI = Math.floor(Math.random()*(max-min+1)+min) 
-}
-
-const cpuPlayInput =(min,max)=>{
-    min=Math.ceil(1)
-    max=Math.floor(cpuInputPool.length)
-    cpuInput = Math.floor(Math.random()*(max-min+1)+min)
-}
-
-const nonantCheck=()=>{
-    if(cpuNonant[cpuRw-1][cpuRwI-1]==="a"){
-    softArray=0
-    softArrI=1
-    }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="b"){
-        softArray=0
-        softArrI=4
-        }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="c"){
-            softArray=0
-            softArrI=7
-            }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="d"){
-                softArray=3
-                softArrI=1
-                }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="e"){
-                    softArray=3
-                    softArrI=4
-                    }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="f"){
-                        softArray=3
-                        softArrI=7
-                        }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="g"){
-                            softArray=6
-                            softArrI=1
-                            }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="h"){
-                                softArray=6
-                                softArrI=4
-                                }else if(cpuNonant[cpuRw-1][cpuRwI-1]==="i"){
-                                    softArray=6
-                                    softArrI=7
-                                    }
-}
-const nonantFilter=()=>{
-for(let i= softArray; i<=softArray+2; i++){
-    for(let j =softArrI; j<=softArrI+2; j++)
-return cpuSoftBoard[i] =cpuSoftBoard[i].filter((x)=>x!==j)
-}}
-const cpuElementFilter=()=>{
- for(let i=0; i<9;i++){
-    return cpuSoftBoard[i]=cpuSoftBoard[i].filter((x)=>x!==cpuRwI)
-    }
-}
-const cpuBoardFilter=()=>{
-cpuBoard[cpuRw-1]= cpuBoard[cpuRw-1].filter((x)=>x!==cpuRwI)
-}
-const cpuRwPoolFilter=()=>{
-    cpuRwPool=cpuRwPool.filter((x)=>x!==cpuRw)
-    console.log(cpuRwPool)
-}
-const autoPopulate =()=>{
-    balance= 0
-    run = 0
-    //while( balance<= cpuBoardRange&& run<= cpuMinsq){
-        
-        cpuAttempt=randomInput()
-        cpuPlayInput()
-        console.log(cpuAttempt)
-        for(let i=0; i<= cpuAttempt;){
-            cpuSoftBoard=cpuBoard
-            cpuPickRw()
-            console.log(cpuRw)
-            cpuPickRwI()
-            console.log(cpuRwI-1)
-            if (document.querySelectorAll(`.rw${cpuRw}`)[cpuRwI-1].innerHTML!==""){
-                cpuBoardFilter()
-                cpuRwPoolFilter()
-                cpuElementFilter()
-                nonantCheck()
-                nonantFilter() 
-            } else{
-            cpuBoardFilter()
-            cpuRwPoolFilter()
-            cpuElementFilter()
-            nonantCheck()
-            nonantFilter() 
-            document.querySelectorAll(`.rw${cpuRw}`)[cpuRwI-1].innerHTML="x"
-            console.log(`rw${cpuRw}`)
-            console.log(cpuRwI-1)
-            console.log(`attempt${i}`)
-            console.log(`${cpuSoftBoard}  ${i}`)
-            console.log(`${cpuRwPool} ${i}`)
-            i++
-        } console.log(cpuSoftBoard)
-    }
-}
-
-const cpuParameter=()=>{
-    if (setDifficulty === "easy"){
-        cpuBoardRange   = 135
-        cpuMinsq        = 40
-}else if (setDifficulty === "medium"){
-        cpuBoardRange   = 108
-        cpuMinsq        = 30
-}else if (setDifficulty === `hard`){
-        cpuBoardRange   = 87
-        cpuMinsq        = 25
-    }
-}
-
-const changingDiff=()=>{
-    for(let set of difficulty){
-        if (set.checked){
-         setDifficulty = set.id
-    }}
-    cpuParameter()
-
-}
-const test=()=>{
-    console.log(setDifficulty)
-}// 
-autoPopulate()
-
-//winning board {
-// 123978564,
-// 456312897,
-// 789645231,
-// 312897456,
-// 645231789,
-// 978564123,
-// 231789645,
-// 564123978,
-// 897456312,
-// }
